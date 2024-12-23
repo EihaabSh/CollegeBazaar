@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:  "Poppins", sans-serif;
+}
+
+.body{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: url("pexels-mario-cuadros-1166886-2706653.jpg");  /* Added closing quotation mark */
+    background-size: cover;
+    background-position: center;
+}
