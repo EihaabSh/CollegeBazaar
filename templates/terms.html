@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - CollegeBazaar</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+        
+        :root {
+            --primary-color: #0B6285;
+            --accent-color: #FF6B4A;
+            --text-dark: #1B3A4B;
+            --text-light: #2C5568;
+            --bg-light: #F5F7FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            height: 80px;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+            background: linear-gradient(135deg, var(--primary-color), #084d69);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav_logo {
+            font-size: clamp(24px, 2.5vw, 28px);
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .terms-container {
+            max-width: 1000px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(11, 98, 133, 0.1);
+        }
+
+        .terms-header h1 {
+            color: var(--text-dark);
+            font-size: clamp(28px, 3vw, 36px);
+            margin-bottom: 15px;
+        }
+
+        .terms-header p {
+            color: var(--text-light);
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .terms-section {
+            margin-bottom: 40px;
+        }
+
+        .terms-section h2 {
+            color: var(--text-dark);
+            font-size: clamp(20px, 2vw, 24px);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(11, 98, 133, 0.1);
+        }
+
+        .terms-section h3 {
+            color: var(--text-dark);
+            font-size: clamp(16px, 1.8vw, 20px);
+            margin: 25px 0 15px;
+        }
+
+        .terms-section p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .terms-section ul {
+            list-style-position: inside;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .terms-section li {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .highlight-box {
+            background: rgba(11, 98, 133, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), #084d69);
+            color: white;
+            padding: clamp(30px, 4vw, 40px);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content .copy {
+            font-size: clamp(14px, 1.5vw, 16px);
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: clamp(15px, 2vw, 25px);
+        }
+
+        .footer-content ul li a {
+            color: rgba(255,255,255,0.8);
+            font-size: clamp(14px, 1.5vw, 16px);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-content ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .terms-container {
+                margin: 100px 20px 30px;
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                height: 70px;
+            }
+            
+            .terms-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="nav_logo">CollegeBazaar</a>
+        </nav>
+    </header>
+
+    <div class="terms-container">
+        <div class="terms-header">
+            <h1>Terms and Conditions</h1>
+            <p>Last updated: January 12, 2025</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>1. Introduction</h2>
+            <p>Welcome to CollegeBazaar. By accessing or using our platform, you agree to be bound by these Terms and Conditions. Please read them carefully before using our services.</p>
+            
+            <div class="highlight-box">
+                <p>These terms constitute a legally binding agreement between you and CollegeBazaar regarding your use of our platform.</p>
+            </div>
+        </div>
+
+        <div class="terms-section">
+            <h2>2. Eligibility and Account Creation</h2>
+            <h3>2.1 User Eligibility</h3>
+            <p>To use CollegeBazaar, you must:</p>
+            <ul>
+                <li>Be a currently enrolled student at a recognized university</li>
+                <li>Have a valid university email address</li>
+                <li>Be at least 18 years of age</li>
+                <li>Be able to form legally binding contracts</li>
+            </ul>
+
+            <h3>2.2 Account Requirements</h3>
+            <p>When creating an account, you must:</p>
+            <ul>
+                <li>Provide accurate and complete information</li>
+                <li>Maintain the security of your account credentials</li>
+                <li>Promptly update any changes to your information</li>
+                <li>Accept responsibility for all activities under your account</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>3. Platform Rules and Guidelines</h2>
+            <h3>3.1 Prohibited Items</h3>
+            <p>The following items are strictly prohibited from being listed or sold:</p>
+            <ul>
+                <li>Illegal items or substances</li>
+                <li>Weapons or dangerous materials</li>
+                <li>Counterfeit or stolen goods</li>
+                <li>Academic cheating materials</li>
+                <li>Explicit or inappropriate content</li>
+            </ul>
+
+            <h3>3.2 User Conduct</h3>
+            <p>Users must:</p>
+            <ul>
+                <li>Treat other users with respect and courtesy</li>
+                <li>Provide accurate descriptions of items</li>
+                <li>Honor commitments to buy or sell</li>
+                <li>Meet in safe, public locations for transactions</li>
+                <li>Report suspicious or inappropriate behavior</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>4. Safety and Security</h2>
+            <p>CollegeBazaar prioritizes user safety and recommends:</p>
+            <ul>
+                <li>Meeting in designated campus safe zones for transactions</li>
+                <li>Verifying the identity of trading partners</li>
+                <li>Using secure payment methods</li>
+                <li>Never sharing personal financial information</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>While we strive to maintain a safe platform, users are ultimately responsible for their own safety and security during transactions.</p>
+            </div>
+        </div>
+
+        <div class="terms-section">
+            <h2>5. Intellectual Property</h2>
+            <p>All content on CollegeBazaar, including but not limited to text, graphics, logos, and software, is the property of CollegeBazaar and is protected by intellectual property laws.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>6. Termination</h2>
+            <p>CollegeBazaar reserves the right to suspend or terminate accounts that:</p>
+            <ul>
+                <li>Violate these terms and conditions</li>
+                <li>Engage in fraudulent activity</li>
+                <li>Misuse the platform</li>
+                <li>Create risk or legal exposure for CollegeBazaar</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>7. Changes to Terms</h2>
+            <p>We may modify these terms at any time. Continued use of CollegeBazaar after changes constitutes acceptance of the modified terms.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>8. Contact Information</h2>
+            <p>For questions about these terms, contact us at:</p>
+            <p>Email: support@collegebazaar.com</p>
+            <p>Address: [Your University Address]</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copy">&copy; 2025 CollegeBazaar. Empowering student communities.</p>
+            <ul class="bottoms">
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="mailto:support@collegebazaar.com">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

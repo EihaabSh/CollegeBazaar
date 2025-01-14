@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Reply</title>
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .message-container {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .sender {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .send-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .send-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Chat with Buyer: {{ reciver_name }}</h1>
+
+<!-- Display previous messages -->
+<div class="message-container">
+    {% for message in messages %}
+        <div class="message">
+            <p class="sender">{{ message['sender_id'] }}:</p>
+            <p>{{ message['message'] }}</p>
+            <p><small>{{ message['create_date'] }}</small></p>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Form for sending a reply -->
+<form action="{{ url_for('send_reply', post_id=post_id) }}" method="POST">
+    <textarea class="message-input" name="reply_message" placeholder="Type your reply..." rows="4" required></textarea><br>
+    <button type="submit" class="send-btn">Send Reply</button>
+</form>
+
+</body>
+</html>

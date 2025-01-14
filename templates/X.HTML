@@ -1,0 +1,9 @@
+{% for post in posts %}
+    <div class="post" onclick="openPost('{{ post._id }}')">
+        <div class="picture-container">
+            <img src="{{ post.picture_url }}" alt="Post Image"> <!-- Display post image -->
+        </div>
+        <p class="name">{{ post.name }}</p>
+        <p class="price">${{ post.price }}</p> <!-- Display price -->
+    </div>
+{% endfor %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect(location.origin);
+        
+        socket.emit('join', {
+            'username': '{{ session["username"] }}',
+            'room': '{{ seller_id }}'
+        });
+
+        // Sending a message
+        function sendMessage() {
+            var messageText = document.getElementById("message-input").value;
+            socket.emit('message', {
+                'sender_id': '{{ session["user_id"] }}',
+                'receiver_id': '{{ seller_id }}',
+                'message': messageText
+            });
+            document.getElementById("message-input").value = "";  // Clear input
+        }
+
+        // Receiving messages
+        socket.on('message', function(data) {
+            var chatBox = document.getElementById("chat-box");
+            var messageElement = document.createElement('p');
+            messageElement.innerHTML = data.sender_id + ": " + data.message;
+            chatBox.appendChild(messageElement);
+        });
+    </script>
+</head>
+<body>
+    <h1>Chat with Seller</h1>
+    <div id="chat-box">
+        {% for message in chat %}
+            <p>{{ message.sender_id }}: {{ message.message }}</p>
+        {% endfor %}
+    </div>
+    <textarea id="message-input" placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>

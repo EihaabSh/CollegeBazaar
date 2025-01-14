@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - CollegeBazaar</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+        
+        :root {
+            --primary-color: #0B6285;
+            --accent-color: #FF6B4A;
+            --text-dark: #1B3A4B;
+            --text-light: #2C5568;
+            --bg-light: #F5F7FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            height: 80px;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+            background: linear-gradient(135deg, var(--primary-color), #084d69);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav_logo {
+            font-size: clamp(24px, 2.5vw, 28px);
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .privacy-container {
+            max-width: 1000px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(11, 98, 133, 0.1);
+        }
+
+        .privacy-header h1 {
+            color: var(--text-dark);
+            font-size: clamp(28px, 3vw, 36px);
+            margin-bottom: 15px;
+        }
+
+        .privacy-header p {
+            color: var(--text-light);
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .privacy-section {
+            margin-bottom: 40px;
+        }
+
+        .privacy-section h2 {
+            color: var(--text-dark);
+            font-size: clamp(20px, 2vw, 24px);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(11, 98, 133, 0.1);
+        }
+
+        .privacy-section h3 {
+            color: var(--text-dark);
+            font-size: clamp(16px, 1.8vw, 20px);
+            margin: 25px 0 15px;
+        }
+
+        .privacy-section p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .privacy-section ul {
+            list-style-position: inside;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .privacy-section li {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        .highlight-box {
+            background: rgba(11, 98, 133, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background-color: rgba(11, 98, 133, 0.05);
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(11, 98, 133, 0.02);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), #084d69);
+            color: white;
+            padding: clamp(30px, 4vw, 40px);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content .copy {
+            font-size: clamp(14px, 1.5vw, 16px);
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: clamp(15px, 2vw, 25px);
+        }
+
+        .footer-content ul li a {
+            color: rgba(255,255,255,0.8);
+            font-size: clamp(14px, 1.5vw, 16px);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-content ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .privacy-container {
+                margin: 100px 20px 30px;
+                padding: 30px;
+            }
+
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                height: 70px;
+            }
+            
+            .privacy-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="nav_logo">CollegeBazaar</a>
+        </nav>
+    </header>
+
+    <div class="privacy-container">
+        <div class="privacy-header">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: January 12, 2025</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>1. Introduction</h2>
+            <p>At CollegeBazaar, we take your privacy seriously. This Privacy Policy explains how we collect, use, protect, and share your personal information when you use our platform.</p>
+            
+            <div class="highlight-box">
+                <p>This policy applies to all services offered by CollegeBazaar, including our website, mobile applications, and related services.</p>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2>2. Information We Collect</h2>
+            
+            <p>We collect the following information from our users:</p>
+            <ul>
+                <li>University email address and verification status</li>
+                <li>Profile information (name, student ID, major)</li>
+                <li>Listing details and transaction history</li>
+                <li>Communications with other users</li>
+                <li>Feedback and support requests</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>3. How We Use Your Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Verify your student status and maintain platform security</li>
+                <li>Enable transactions between users</li>
+                <li>Improve our services and user experience</li>
+                <li>Send important updates and notifications</li>
+                <li>Prevent fraud and ensure compliance with our terms</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p>We never sell your personal information to third parties or use it for purposes other than those specified in this policy.</p>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2>4. Data Security</h2>
+            <h3>4.1 Security Measures</h3>
+            <p>We implement industry-standard security measures including:</p>
+            <ul>
+                <li>End-to-end encryption for sensitive data</li>
+                <li>Regular security audits and updates</li>
+                <li>Secure data storage and transmission</li>
+                <li>Access controls and authentication</li>
+            </ul>
+
+            <h3>4.2 Data Retention</h3>
+            <p>We retain your data only for as long as necessary to:</p>
+            <ul>
+                <li>Provide our services to you</li>
+                <li>Comply with legal obligations</li>
+                <li>Resolve disputes</li>
+                <li>Enforce our agreements</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>5. Your Privacy Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Access your personal information</li>
+                <li>Request corrections to your data</li>
+                <li>Delete your account and associated data</li>
+                <li>Opt-out of marketing communications</li>
+                <li>Export your data in a portable format</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>6. Third-Party Services</h2>
+            <p>We may use third-party services for:</p>
+            <ul>
+                <li>Payment processing</li>
+                <li>Email communications</li>
+                <li>Analytics and performance monitoring</li>
+                <li>User verification</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>These service providers are contractually obligated to protect your data and can only use it for specified purposes.</p>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2>7. Updates to This Policy</h2>
+            <p>We may update this Privacy Policy periodically. We will notify you of any material changes through:</p>
+            <ul>
+                <li>Email notifications</li>
+                <li>Platform announcements</li>
+                <li>Website notifications</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>8. Contact Information</h2>
+            <p>For privacy-related inquiries, contact our Data Protection Officer at:</p>
+            <p>Email: privacy@collegebazaar.com</p>
+            <p>Address: [Your University Address]</p>
+            
+            <div class="highlight-box">
+                <p>We aim to respond to all privacy-related requests within 48 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copy">&copy; 2025 CollegeBazaar. Empowering student communities.</p>
+            <ul class="bottoms">
+                <li><a href="/terms">Terms of Service</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="mailto:support@collegebazaar.com">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

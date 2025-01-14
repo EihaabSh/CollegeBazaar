@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search - theCollegeBazaar</title>
+    
+    <!-- External Icon Library -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+   
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        /* Base Styles */
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0; 
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0B6285;
+            color: white;
+            height: 80px;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header .logo {
+            font-size: 25px;
+            font-weight: bold;
+            font-family: "Poppins", sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .header .logo:hover {
+            color: #FF6B4A;
+        }
+        
+        .header .create-post-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 6px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-left: auto;
+            transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        .header .create-post-btn:hover {
+            background-color: #FF6B4A;
+            border-color: #FF6B4A;
+        }
+        
+        .header .sidebar-btn {
+            font-size: 25px;
+            cursor: pointer;
+            margin-left: 20px;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        
+        .header .sidebar-btn:hover {
+            color: #FF6B4A;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(135deg, #0B6285 0%, #074961 100%);
+            transition: all 0.3s ease-in-out;
+            padding: 20px;
+            z-index: 200;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        
+        .sidebar.open {
+            right: 0;
+        }
+        
+        .sidebar .close-btn {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .sidebar .close-btn:hover {
+            color: #FF6B4A;
+        }
+        
+        .sidebar .content {
+            margin-top: 70px;
+            padding: 0 10px;
+        }
+        
+        .sidebar .content h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .sidebar .content ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar .content ul li {
+            margin-bottom: 20px;
+        }
+        
+        .sidebar .content ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar .content ul li a:hover {
+            background-color: #FF6B4A;
+            transform: translateX(5px);
+        }
+        
+        .sidebar .content .create-post-btn {
+            background-color: #FF6B4A;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar .content .create-post-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .sidebar .content .create-post-btn a {
+            background-color: transparent;
+        }
+        
+        .sidebar .delete-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .sidebar .delete-btn:hover {
+            background-color: #FF6B4A;
+        }
+        
+        /* Main Content Styles */
+        h2 {
+            text-align: center;
+            color: #1B3A4B;
+            margin-top: 20px;
+        }
+        
+        /* Search Container Styles */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .search-container form {
+            display: flex;
+            gap: 12px;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(11, 98, 133, 0.08);
+            width: 100%;
+        }
+        
+        .search-container input,
+        .search-container select {
+            padding: 12px 16px;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(11, 98, 133, 0.15);
+            background-color: #F8F9FA;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .search-container input:focus,
+        .search-container select:focus {
+            outline: none;
+            border-color: #0B6285;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(11, 98, 133, 0.1);
+        }
+        
+        .search-container button {
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            background-color: #0B6285;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-container button:hover {
+            background-color: #FF6B4A;
+            transform: translateY(-2px);
+        }
+        
+        /* Post Container and Card Styles */
+        .post-container {
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        
+        .post {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #eee;
+        }
+        
+        .post:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .picture-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f8f9fa;
+        }
+        
+        .picture-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .post:hover .picture-container img {
+            transform: scale(1.05);
+        }
+        
+        .post-info {
+            padding: 15px;
+        }
+        
+        .post .name {
+            font-size: 17px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+            height: 40px;
+        }
+        
+        .post .price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0B6285;
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(11, 98, 133, 0.08);
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+        
+        /* Show More Button */
+        button.show {
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            background-color: #0B6285;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto;
+        }
+        
+        button.show:hover {
+            background-color: #FF6B4A;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            /* Sidebar Responsive Styles */
+            .sidebar {
+                width: 70%;
+                right: -70%;
+            }
+        
+            .sidebar .content {
+                margin-top: 60px;
+            }
+        
+            .sidebar .content h3 {
+                font-size: 22px;
+                margin-bottom: 25px;
+            }
+        
+            .sidebar .content ul li a {
+                font-size: 15px;
+                padding: 10px 12px;
+            }
+        
+            .sidebar .delete-btn {
+                font-size: 15px;
+                padding: 10px;
+            }
+        
+            /* Search Container Responsive Styles */
+            .search-container form {
+                flex-direction: column;
+                width: 90%;
+                max-width: 400px;
+                gap: 10px;
+            }
+        
+            .search-container input,
+            .search-container select,
+            .search-container button {
+                width: 100%;
+            }
+        
+            .post-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 15px;
+                padding: 0 15px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            /* Sidebar Responsive Styles */
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        
+            .sidebar .close-btn {
+                font-size: 22px;
+                top: 15px;
+                right: 15px;
+            }
+        
+            .sidebar .content {
+                margin-top: 50px;
+                padding: 0 5px;
+            }
+        
+            .sidebar .content h3 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+        
+            .sidebar .content ul li {
+                margin-bottom: 12px;
+            }
+        
+            .sidebar .content ul li a {
+                font-size: 14px;
+                padding: 12px 15px;
+                border-radius: 6px;
+            }
+        
+            .sidebar .delete-btn {
+                font-size: 14px;
+                padding: 12px;
+                margin-top: 15px;
+                border-radius: 6px;
+            }
+        
+            /* Header Responsive Styles */
+            .header {
+                padding: 0 15px;
+                height: 70px;
+            }
+        
+            .header .logo {
+                font-size: 20px;
+            }
+        
+            .header .sidebar-btn {
+                font-size: 22px;
+            }
+        
+            /* Content Responsive Styles */
+            .picture-container {
+                height: 180px;
+            }
+        
+            .post-info {
+                padding: 12px;
+            }
+        
+            .post .name {
+                font-size: 13px;
+            }
+        
+            .post .price {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="home()">CollegeBazaar</div>
+        
+        <!-- Sidebar Toggle Button -->
+        <div class="sidebar-btn" onclick="toggleSidebar()">
+            <i class="uil uil-bars"></i>
+        </div>
+    </header>
+
+    <!-- Updated Sidebar Structure -->
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">
+            <i class="uil uil-times"></i>
+        </div>
+        <div class="content">
+            <h3>Menu</h3>
+            <ul>
+                <li class="create-post-btn">
+                    <a href="#" onclick="createPostClicked()">
+                        <i class="uil uil-plus-circle"></i>
+                        <span style="margin-left: 10px;">Create Post</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="profileClicked()">
+                        <i class="uil uil-user"></i>
+                        <span style="margin-left: 10px;">My Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:eihaabsharif@gmail.com">
+                        <i class="uil uil-envelope"></i>
+                        <span style="margin-left: 10px;">Contact</span>
+                    </a>
+                </li>
+                <li>
+                    <form action="/logout" method="POST">
+                        <button type="submit" class="delete-btn">
+                            <i class="uil uil-signout"></i>
+                            <span style="margin-left: 10px;">Logout</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>{{uni}}</h2>
+
+    <!-- Search and Filter Container -->
+    <div class="search-container">
+        <form method="GET" action="/search/{{ University }}">
+            <input type="text" name="search" placeholder="Search by name">
+            <select name="category">
+                <option value="All">All Categories</option>
+                <option value="Service">Service</option>
+                <option value="Textbooks">Textbooks</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Roommates">Roommates</option>
+                <option value="Study buddy">Study buddy</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Post Container -->
+    <div id="target" class="post-container">
+        {% for post in posts %}
+            <div class="post" onclick="openPost('{{ post._id }}')">
+                <div class="picture-container">
+                    <img src="{{ post.picture_url }}" alt="Post Image">
+                </div>
+                <div class="post-info">
+                    <p class="name">{{ post.name }}</p>
+                    <p class="price">${{ post.price }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="x" method="POST">
+        <input type="hidden" name="page" value="{{ page + 1 }}">
+        {% if shower %}
+        <button id="scroll" class="show" type="submit" name="submit_button" value="Action1">Show more!</button>
+        {% endif %}
+    </form>
+
+    <script>
+        function createPostClicked() {
+            window.location.href = "/create_post";
+        }
+
+        function profileClicked() {
+            window.location.href = "/profile";
+        }
+
+        function home() {
+            window.history.back();
+        }
+
+        function openPost(postId) {
+            window.location.href = "/post/" + postId;
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

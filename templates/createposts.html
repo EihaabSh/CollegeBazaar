@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create posts - theCollegeBazaar</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+        
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0B6285;
+            color: white;
+            height: 80px;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .logo {
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .header .logo:hover {
+            color: #FF6B4A;
+        }
+
+        .header .sidebar-btn {
+            font-size: 25px;
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .header .sidebar-btn:hover {
+            color: #FF6B4A;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(135deg, #0B6285 0%, #074961 100%);
+            transition: right 0.3s ease;
+            padding: 20px;
+            z-index: 200;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar .close-btn {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar .close-btn:hover {
+            color: #FF6B4A;
+        }
+
+        .sidebar .content {
+            margin-top: 70px;
+            padding: 0 10px;
+        }
+
+        .sidebar .content h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .sidebar .content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar .content ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .content ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .content ul li a:hover {
+            background-color: #FF6B4A;
+            transform: translateX(5px);
+        }
+
+        .sidebar .content .create-post-btn {
+            background-color: #FF6B4A;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar .content .create-post-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .sidebar .content .create-post-btn a {
+            background-color: transparent;
+        }
+
+        .sidebar .delete-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .sidebar .delete-btn:hover {
+            background-color: #FF6B4A;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1B3A4B;
+            margin: 40px 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .form-container {
+            margin: 20px auto 60px;
+            max-width: 700px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+        }
+
+        .form-container input,
+        .form-container textarea,
+        .form-container select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 2px solid #e1e1e1;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .form-container input:focus,
+        .form-container textarea:focus,
+        .form-container select:focus {
+            outline: none;
+            border-color: #0B6285;
+            box-shadow: 0 0 0 3px rgba(11, 98, 133, 0.1);
+        }
+
+        .form-container input[type="file"] {
+            display: none;
+        }
+
+        .form-container .upload-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 2px dashed #0B6285;
+            color: #0B6285;
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            font-size: 48px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container .upload-label:hover {
+            background-color: rgba(11, 98, 133, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-container button {
+            padding: 15px 25px;
+            background-color: #0B6285;
+            color: white;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(11, 98, 133, 0.2);
+        }
+
+        .form-container button:hover {
+            background-color: #FF6B4A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 74, 0.3);
+        }
+
+        .form-container button:active {
+            transform: translateY(0);
+        }
+
+        #message {
+            color: #28a745;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        #wordCount {
+            color: #0B6285;
+            font-weight: 500;
+        }
+
+        .character-count {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 20px;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin: 30px 0;
+            }
+            
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        }
+        #icon {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="home()">CollegeBazaar</div>
+        <div class="sidebar-btn" onclick="toggleSidebar()">
+            <i class="uil uil-bars"></i>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">
+            <i class="uil uil-times"></i>
+        </div>
+        <div class="content">
+            <h3>Menu</h3>
+            <ul>
+                
+                <li>
+                    <a href="#" onclick="profileClicked()">
+                        <i class="uil uil-user"></i>
+                        <span style="margin-left: 10px;">My Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:eihaabsharif@gmail.com">
+                        <i class="uil uil-envelope"></i>
+                        <span style="margin-left: 10px;">Contact</span>
+                    </a>
+                </li>
+                <li>
+                    <form action="/logout" method="POST">
+                        <button type="submit" class="delete-btn">
+                            <i class="uil uil-signout"></i>
+                            <span style="margin-left: 10px;">Logout</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <h1>Create a New Post!</h1>
+
+    <div class="form-container">
+        <form action="/create_post" method="POST" enctype="multipart/form-data">
+            <textarea name="name" placeholder="Write an engaging title..." rows="1" required></textarea>
+
+            <input  type="file" name="picture" accept="image/*" id="fileInput" onchange="showMessage()" required>
+            <p id="message" style="display: none;">Image has been successfully inserted!</p>
+
+            <label id ="z" for="fileInput" class="upload-label">
+                <i id="y" class="uil uil-image-upload"></i>
+            </label>
+
+            <select name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Service">Service</option>
+                <option value="Textbooks">Textbooks</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Roommates">Roommates</option>
+            </select>
+
+            <input type="number" name="price" placeholder="Enter price ($)" step="0.01" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone: (123)-456-7890" 
+       pattern="\([0-9]{3}\)-[0-9]{3}-[0-9]{4}">
+
+
+
+            <textarea maxlength="300" name="description" placeholder="Describe your item or service..." 
+                      rows="4" id="description" oninput="limitWords()" required></textarea>
+            <span class="character-count"><span id="wordCount">0</span> / 300 characters</span>
+
+            <button type="submit">
+                <i class="uil uil-plus-circle"></i> Create Post
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function home() {
+            window.history.back();
+        }
+
+        function profileClicked() {
+            window.location.href = "/profile";
+        }
+
+        function createPostClicked() {
+            window.location.href = "/create_post";
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function showMessage() {
+            const message = document.getElementById("message");
+            message.style.display = "block";
+            
+            var icon = document.getElementById("y");
+            var fgsf = document.getElementById("z");
+            if (icon.className === "uil uil-image-upload") {
+                icon.setAttribute("class", "uil uil-check"); // Change to check icon
+                icon.style.color = "#28a745";
+                fgsf.style.border = "2px solid #28a745";
+
+            } else {
+                icon.setAttribute("class", "uil uil-envelope"); // Change back to envelope icon
+            }
+        }
+        
+
+        var myText = document.getElementById("description");
+        var characterCount = document.getElementById("wordCount");
+
+        myText.addEventListener("keyup", function(){
+            var characters = myText.value.split('');
+            characterCount.innerText = characters.length;
+        });
+    </script>
+</body>
+</html>
