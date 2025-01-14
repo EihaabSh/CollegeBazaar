@@ -12,8 +12,7 @@ from bson import ObjectId
 from io import BytesIO
 from PIL import Image
 
-from cryptography.fernet import Fernet
-from collections.abc import MutableMapping
+
 from datetime import datetime
 import uuid
 from urllib.parse import urlparse
