@@ -11,7 +11,7 @@ import boto3
 from bson import ObjectId
 from io import BytesIO
 from PIL import Image
-from flask_socketio import SocketIO, join_room, leave_room, send
+
 from cryptography.fernet import Fernet
 from collections.abc import MutableMapping
 from datetime import datetime
@@ -19,7 +19,7 @@ import uuid
 from urllib.parse import urlparse
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -441,52 +441,7 @@ def message(post_id):
 
     return render_template('messages.html', chat=chat_messages, seller_id=seller_id)
 
-# Handling users joining the chat room
-@socketio.on('join')
-def on_join(data):
-    username = data['username']
-    room = data['room']
-    join_room(room)
-    send(username + ' has entered the room.', to=room)
 
-# Handling messages being sent and broadcast to the room
-@socketio.on('message')
-def handle_message(data):
-    sender_id = data['sender_id']
-    receiver_id = data['receiver_id']
-    message_text = data['message']
-    
-    room_name = f"{min(sender_id, receiver_id)}_{max(sender_id, receiver_id)}"
-    
-    # Encrypt the message before saving
-    encrypted_message = encrypt_message(message_text)
-
-    # Store the encrypted message in MongoDB
-    new_message = {
-        "sender_id": sender_id,
-        "receiver_id": receiver_id,
-        "message": encrypted_message,
-        "timestamp": datetime.utcnow()
-    }
-    messages_collection.insert_one(new_message)
-
-    # Emit the encrypted message to the room
-    send({'sender_id': sender_id, 'message': encrypted_message}, to=room_name)
-
-
-#////////
-
-# Generate a key and store it securely
-key = Fernet.generate_key()
-cipher = Fernet(key)
-
-# Encrypt the message before saving to MongoDB
-def encrypt_message(message):
-    return cipher.encrypt(message.encode()).decode()
-
-# Decrypt message when fetching from the database
-def decrypt_message(encrypted_message):
-    return cipher.decrypt(encrypted_message.encode()).decode()
 
 
 
@@ -503,4 +458,4 @@ def decrypt_message(encrypted_message):
     
 
 if __name__ == "__main__":
-    socketio.run(app)
+    app.run(host="0.0.0.0", port=8000)
