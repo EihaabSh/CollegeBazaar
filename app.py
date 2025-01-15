@@ -11,8 +11,7 @@ import boto3
 from bson import ObjectId
 from io import BytesIO
 from PIL import Image
-
-
+import certifi
 from datetime import datetime
 import uuid
 from urllib.parse import urlparse
@@ -41,7 +40,10 @@ s3 = boto3.client(
 
 
 
-client = MongoClient(uri)
+client = pymongo.MongoClient(
+    uri,
+    tlsCAFile=certifi.where()
+)
 
 # Connect to a specific database
 db = client['CollegeBazaar']  # Replace with your actual database name
