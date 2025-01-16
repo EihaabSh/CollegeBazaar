@@ -50,10 +50,16 @@
         .header .sidebar-btn {
             font-size: clamp(20px, 5vw, 25px);
             cursor: pointer;
+            margin-left: 20px;
             color: white;
             transition: color 0.3s ease;
         }
 
+        .header .sidebar-btn:hover {
+            color: #FF6B4A;
+        }
+
+        /* Sidebar Styles */
         .sidebar {
             position: fixed;
             top: 0;
@@ -69,6 +75,88 @@
 
         .sidebar.open {
             right: 0;
+        }
+
+        .sidebar .close-btn {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar .close-btn:hover {
+            color: #FF6B4A;
+        }
+
+        .sidebar .content {
+            margin-top: 70px;
+            padding: 0 10px;
+        }
+
+        .sidebar .content h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .sidebar .content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar .content ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .content ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .content ul li a:hover {
+            background-color: #FF6B4A;
+            transform: translateX(5px);
+        }
+
+        .sidebar .content .create-post-btn {
+            background-color: #FF6B4A;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar .content .create-post-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .sidebar .delete-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .sidebar .delete-btn:hover {
+            background-color: #FF6B4A;
         }
 
         h1 {
@@ -96,6 +184,11 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .post-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
         .post {
             display: flex;
             flex-wrap: wrap;
@@ -117,6 +210,10 @@
             object-fit: cover;
             border-radius: 8px;
             transition: transform 0.3s ease;
+        }
+
+        .post-container:hover .picture-container img {
+            transform: scale(1.05);
         }
 
         .post-info {
@@ -167,6 +264,15 @@
 
         .delete-btn:hover {
             background-color: #d32f2f;
+        }
+
+        .reply-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .reply-btn:hover {
+            background-color: #388E3C;
         }
 
         @media (max-width: 600px) {
