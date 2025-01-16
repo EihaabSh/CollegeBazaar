@@ -16,7 +16,8 @@ from datetime import datetime
 import uuid
 from urllib.parse import urlparse
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+
+
 
 
 # Load environment variables from .env file
