@@ -30,6 +30,8 @@ uri = os.getenv("uri")
 app.secret_key = os.getenv("app.secret_key")
 
 
+print(app.secret_key)
+
 
 # Initialize the S3 client
 s3 = boto3.client(
