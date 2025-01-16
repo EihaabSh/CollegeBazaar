@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My posts - theCollegeBazaar</title>
+    <title>create posts - theCollegeBazaar</title>
+    
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
         
@@ -18,8 +20,8 @@
 
         body {
             margin: 0;
-            font-family: Poppins, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f0f2f5;
+            min-height: 100vh;
         }
 
         .header {
@@ -32,15 +34,14 @@
             width: 100%;
             z-index: 100;
             padding: 0 20px;
-            position: sticky;
-            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .header .logo {
-            font-size: clamp(18px, 5vw, 25px);
+            font-size: 25px;
             font-weight: bold;
-            color: white;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
         .header .logo:hover {
@@ -48,7 +49,7 @@
         }
 
         .header .sidebar-btn {
-            font-size: clamp(20px, 5vw, 25px);
+            font-size: 25px;
             cursor: pointer;
             margin-left: 20px;
             color: white;
@@ -141,6 +142,10 @@
             transform: translateY(-2px);
         }
 
+        .sidebar .content .create-post-btn a {
+            background-color: transparent;
+        }
+
         .sidebar .delete-btn {
             width: 100%;
             padding: 12px;
@@ -162,166 +167,129 @@
         h1 {
             text-align: center;
             color: #1B3A4B;
-            margin: 20px 0;
-            font-size: clamp(24px, 5vw, 28px);
+            margin: 40px 0;
+            font-size: 2.5rem;
+            font-weight: 600;
         }
 
-        .scroller {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 800px;
-            width: 95%;
-        }
-
-        .post-container {
+        .form-container {
+            margin: 20px auto 60px;
+            max-width: 700px;
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+        }
+
+        .form-container input,
+        .form-container textarea,
+        .form-container select {
+            width: 100%;
             padding: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .post-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .post {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .picture-container {
-            width: 100%;
-            max-width: 200px;
-            aspect-ratio: 1;
-            overflow: hidden;
+            margin-bottom: 20px;
             border-radius: 8px;
-            margin: 0 auto;
+            border: 2px solid #e1e1e1;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f8f9fa;
         }
 
-        .picture-container img {
+        .form-container input:focus,
+        .form-container textarea:focus,
+        .form-container select:focus {
+            outline: none;
+            border-color: #0B6285;
+            box-shadow: 0 0 0 3px rgba(11, 98, 133, 0.1);
+        }
+
+        .form-container input[type="file"] {
+            display: none;
+        }
+
+        .form-container .upload-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 2px dashed #0B6285;
+            color: #0B6285;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 120px;
             border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .post-container:hover .picture-container img {
-            transform: scale(1.05);
-        }
-
-        .post-info {
-            flex: 1;
-            min-width: 200px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .post-info h3 {
-            color: #1B3A4B;
-            font-size: clamp(16px, 4vw, 20px);
-            word-wrap: break-word;
-        }
-
-        .price {
-            font-size: clamp(16px, 4vw, 20px);
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        .post-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            max-width: 150px;
-            margin: 0 auto;
-        }
-
-        .delete-btn,
-        .reply-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
+            font-size: 48px;
             cursor: pointer;
-            font-family: "Poppins", sans-serif;
-            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container .upload-label:hover {
+            background-color: rgba(11, 98, 133, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-container button {
+            padding: 15px 25px;
+            background-color: #0B6285;
+            color: white;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
             width: 100%;
-            font-size: clamp(14px, 3vw, 16px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(11, 98, 133, 0.2);
         }
 
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
+        .form-container button:hover {
+            background-color: #FF6B4A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 74, 0.3);
         }
 
-        .delete-btn:hover {
-            background-color: #d32f2f;
+        .form-container button:active {
+            transform: translateY(0);
         }
 
-        .reply-btn {
-            background-color: #4CAF50;
-            color: white;
+        #message {
+            color: #28a745;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
         }
 
-        .reply-btn:hover {
-            background-color: #388E3C;
+        #wordCount {
+            color: #0B6285;
+            font-weight: 500;
         }
 
-        @media (max-width: 600px) {
-            .post {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+        .character-count {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 20px;
+                padding: 30px;
             }
 
-            .picture-container {
-                max-width: 100%;
-                height: auto;
+            h1 {
+                font-size: 2rem;
+                margin: 30px 0;
             }
-
-            .post-info {
+            
+            .sidebar {
                 width: 100%;
-                align-items: center;
-            }
-
-            .post-buttons {
-                flex-direction: row;
-                max-width: 100%;
-                justify-content: center;
-            }
-
-            .post-buttons form {
-                flex: 1;
-                max-width: 150px;
+                right: -100%;
             }
         }
-
-        @media (max-width: 400px) {
-            .scroller {
-                padding: 10px;
-            }
-
-            .post-container {
-                padding: 10px;
-            }
-
-            .post-buttons {
-                flex-direction: column;
-            }
-
-            .post-buttons form {
-                max-width: 100%;
-            }
+        #icon {
+            color: green;
         }
-
     </style>
 </head>
 <body>
@@ -330,8 +298,9 @@
         <div class="sidebar-btn" onclick="toggleSidebar()">
             <i class="uil uil-bars"></i>
         </div>
-    </header>  
+    </header>
 
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleSidebar()">
             <i class="uil uil-times"></i>
@@ -339,10 +308,11 @@
         <div class="content">
             <h3>Menu</h3>
             <ul>
-                <li class="create-post-btn">
-                    <a href="#" onclick="createPostClicked()">
-                        <i class="uil uil-plus-circle"></i>
-                        <span style="margin-left: 10px;">Create Post</span>
+                
+                <li>
+                    <a href="#" onclick="profileClicked()">
+                        <i class="uil uil-user"></i>
+                        <span style="margin-left: 10px;">My Posts</span>
                     </a>
                 </li>
                 <li>
@@ -363,51 +333,84 @@
         </div>
     </div>
 
-    <h1>Your Posts!</h1>
+    <h1>Create a New Post!</h1>
 
-    <div class="scroller">
-        {% for post in posts %}
-            <div class="post-container">
-                <div class="post" onclick="openPost('{{ post._id }}')">
-                    <div class="picture-container">
-                        <img src="{{ post.picture_url }}" alt="Post Image">
-                    </div>
-                    <div class="post-info">
-                        <h3>{{ post.name }}</h3>
-                        <p class="price">${{ post.price }}</p>
-                    </div>
-                    <div class="post-buttons">
-                        <form action="/delete_post/{{ post['_id'] }}" method="POST">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                        <form action="/delete_post/{{ post['_id'] }}" method="POST">
-                            <button type="submit" class="delete-btn" style="background-color: orange;">Sold!</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <p>No posts to display.</p>
-        {% endfor %}
+    <div class="form-container">
+        <form action="/create_post" method="POST" enctype="multipart/form-data">
+            <textarea name="name" placeholder="Write an engaging title..." rows="1" required></textarea>
+
+            <input  type="file" name="picture" accept="image/*" id="fileInput" onchange="showMessage()" required>
+            <p id="message" style="display: none;">Image has been successfully inserted!</p>
+
+            <label id ="z" for="fileInput" class="upload-label">
+                <i id="y" class="uil uil-image-upload"></i>
+            </label>
+
+            <select name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Service">Service</option>
+                <option value="Textbooks">Textbooks</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Roommates">Roommates</option>
+            </select>
+
+            <input type="number" name="price" placeholder="Enter price ($)" step="0.01" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone: (123)-456-7890" 
+       pattern="\([0-9]{3}\)-[0-9]{3}-[0-9]{4}">
+
+            <textarea maxlength="300" name="description" placeholder="Describe your item or service..." 
+                      rows="4" id="description" oninput="limitWords()" required></textarea>
+            <span class="character-count"><span id="wordCount">0</span> / 300 characters</span>
+
+            <button type="submit">
+                <i class="uil uil-plus-circle"></i> Create Post
+            </button>
+        </form>
     </div>
 
     <script>
+        function home() {
+            window.history.back();
+        }
+
+        function profileClicked() {
+            window.location.href = "/profile";
+        }
+
+        function createPostClicked() {
+            window.location.href = "/create_post";
+        }
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('open');
         }
 
-        function home() {
-            window.history.back();
-        }
+        function showMessage() {
+            const message = document.getElementById("message");
+            message.style.display = "block";
+            
+            var icon = document.getElementById("y");
+            var fgsf = document.getElementById("z");
+            if (icon.className === "uil uil-image-upload") {
+                icon.setAttribute("class", "uil uil-check"); // Change to check icon
+                icon.style.color = "#28a745";
+                fgsf.style.border = "2px solid #28a745";
 
-        function createPostClicked() {
-            window.location.href = "/create_post"
+            } else {
+                icon.setAttribute("class", "uil uil-envelope"); // Change back to envelope icon
+            }
         }
+        
+        var myText = document.getElementById("description");
+        var characterCount = document.getElementById("wordCount");
 
-        function openPost(postId) {
-            window.location.href = "/post/" + postId;
-        }
+        myText.addEventListener("keyup", function(){
+            var characters = myText.value.split('');
+            characterCount.innerText = characters.length;
+        });
     </script>
 </body>
 </html>
