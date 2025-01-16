@@ -27,7 +27,8 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_REGION = os.getenv("AWS_REGION")
 AWS_BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
 uri = os.getenv("uri")
-app.secret_key = "Im_AsnjOANFAfmmsmsmaTestForNoW"
+secret_key = os.getenv("SECRET_KEY")
+app.secret_key = secret_key
 
 
 print(app.secret_key)
