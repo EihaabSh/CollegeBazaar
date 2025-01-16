@@ -5,10 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My posts - theCollegeBazaar</title>
-
-    <!-- External Icon Library -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
         
@@ -35,12 +32,13 @@
             width: 100%;
             z-index: 100;
             padding: 0 20px;
+            position: sticky;
+            top: 0;
         }
 
         .header .logo {
-            font-size: 25px;
+            font-size: clamp(18px, 5vw, 25px);
             font-weight: bold;
-            font-family: "Poppins", sans-serif;
             color: white;
             cursor: pointer;
         }
@@ -49,25 +47,18 @@
             color: #FF6B4A;
         }
 
-        /* Sidebar Button */
         .header .sidebar-btn {
-            font-size: 25px;
+            font-size: clamp(20px, 5vw, 25px);
             cursor: pointer;
-            margin-left: 20px;
             color: white;
             transition: color 0.3s ease;
         }
 
-        .header .sidebar-btn:hover {
-            color: #FF6B4A;
-        }
-
-        /* Sidebar Styles */
         .sidebar {
             position: fixed;
             top: 0;
             right: -300px;
-            width: 300px;
+            width: min(300px, 80vw);
             height: 100%;
             background: linear-gradient(135deg, #0B6285 0%, #074961 100%);
             transition: right 0.3s ease;
@@ -80,93 +71,11 @@
             right: 0;
         }
 
-        .sidebar .close-btn {
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .sidebar .close-btn:hover {
-            color: #FF6B4A;
-        }
-
-        .sidebar .content {
-            margin-top: 70px;
-            padding: 0 10px;
-        }
-
-        .sidebar .content h3 {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .sidebar .content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar .content ul li {
-            margin-bottom: 20px;
-        }
-
-        .sidebar .content ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar .content ul li a:hover {
-            background-color: #FF6B4A;
-            transform: translateX(5px);
-        }
-
-        .sidebar .content .create-post-btn {
-            background-color: #FF6B4A;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar .content .create-post-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .sidebar .delete-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: "Poppins", sans-serif;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .sidebar .delete-btn:hover {
-            background-color: #FF6B4A;
-        }
-
         h1 {
             text-align: center;
             color: #1B3A4B;
             margin: 20px 0;
-            font-size: 28px;
+            font-size: clamp(24px, 5vw, 28px);
         }
 
         .scroller {
@@ -176,34 +85,30 @@
             padding: 20px;
             margin: 0 auto;
             max-width: 800px;
-            height: auto;
+            width: 95%;
         }
 
         .post-container {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .post-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .post {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
-            align-items: start;
         }
 
         .picture-container {
-            width: 200px;
-            height: 200px;
+            width: 100%;
+            max-width: 200px;
+            aspect-ratio: 1;
             overflow: hidden;
             border-radius: 8px;
-            flex-shrink: 0;
+            margin: 0 auto;
         }
 
         .picture-container img {
@@ -214,12 +119,9 @@
             transition: transform 0.3s ease;
         }
 
-        .post-container:hover .picture-container img {
-            transform: scale(1.05);
-        }
-
         .post-info {
             flex: 1;
+            min-width: 200px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -227,11 +129,12 @@
 
         .post-info h3 {
             color: #1B3A4B;
-            margin: 0;
+            font-size: clamp(16px, 4vw, 20px);
+            word-wrap: break-word;
         }
 
         .price {
-            font-size: 20px;
+            font-size: clamp(16px, 4vw, 20px);
             font-weight: bold;
             color: #28a745;
         }
@@ -240,7 +143,9 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            min-width: 100px;
+            width: 100%;
+            max-width: 150px;
+            margin: 0 auto;
         }
 
         .delete-btn,
@@ -252,6 +157,7 @@
             font-family: "Poppins", sans-serif;
             transition: background-color 0.3s ease;
             width: 100%;
+            font-size: clamp(14px, 3vw, 16px);
         }
 
         .delete-btn {
@@ -263,46 +169,62 @@
             background-color: #d32f2f;
         }
 
-        .reply-btn {
-            background-color: #4CAF50;
-            color: white;
+        @media (max-width: 600px) {
+            .post {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .picture-container {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .post-info {
+                width: 100%;
+                align-items: center;
+            }
+
+            .post-buttons {
+                flex-direction: row;
+                max-width: 100%;
+                justify-content: center;
+            }
+
+            .post-buttons form {
+                flex: 1;
+                max-width: 150px;
+            }
         }
 
-        .reply-btn:hover {
-            background-color: #388E3C;
-        }
+        @media (max-width: 400px) {
+            .scroller {
+                padding: 10px;
+            }
 
-        .logout-container {
-            text-align: center;
-            margin: 20px 0;
-        }
+            .post-container {
+                padding: 10px;
+            }
 
-        .logout-btn {
-            background-color: #1B3A4B;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: "Poppins", sans-serif;
-            transition: background-color 0.3s ease;
-        }
+            .post-buttons {
+                flex-direction: column;
+            }
 
-        .logout-btn:hover {
-            background-color: #FF6B4A;
+            .post-buttons form {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo" onclick="home()">CollegeBazaar</div>
-        <!-- Sidebar Toggle Button -->
         <div class="sidebar-btn" onclick="toggleSidebar()">
             <i class="uil uil-bars"></i>
         </div>
     </header>  
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleSidebar()">
             <i class="uil uil-times"></i>
@@ -316,7 +238,6 @@
                         <span style="margin-left: 10px;">Create Post</span>
                     </a>
                 </li>
-                
                 <li>
                     <a href="mailto:collegebazaardeveloper@gmail.com">
                         <i class="uil uil-envelope"></i>
@@ -354,9 +275,7 @@
                         </form>
                         <form action="/delete_post/{{ post['_id'] }}" method="POST">
                             <button type="submit" class="delete-btn" style="background-color: orange;">Sold!</button>
-
                         </form>
-                       
                     </div>
                 </div>
             </div>
@@ -375,16 +294,8 @@
             window.history.back();
         }
 
-        function reply(post_id) {
-            window.location.href = "/send_reply/" + post_id;
-        }
-
         function createPostClicked() {
             window.location.href = "/create_post"
-        }
-
-        function profileClicked() {
-            window.location.href = "/profile";
         }
 
         function openPost(postId) {
